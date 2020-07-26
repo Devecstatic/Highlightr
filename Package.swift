@@ -25,10 +25,14 @@ let package = Package(
         .target(
             name: "Highlightr",
             dependencies: [],
-            path: "Highlightr",
             resources: [
                 .copy("Assets"),
-                .copy("Highlightr")
+                .copy("Highlightr"),
+                .copy("Highlightr.swift"),
+                .copy("CodeAttributedString.swift"),
+                .copy("HTMLUtils.swift"),
+                .copy("Shims.swift"),
+                .copy("Theme.swift")
             ]),
         .testTarget(
             name: "HighlightrTests",
