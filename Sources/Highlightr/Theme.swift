@@ -9,17 +9,17 @@
 import Foundation
 
 #if os(iOS) || os(tvOS)
-    import UIKit
-    /// Typealias for UIColor
-    public typealias RPColor = UIColor
-    /// Typealias for UIFont
-    public typealias RPFont = UIFont
+import UIKit
+/// Typealias for UIColor
+public typealias RPColor = UIColor
+/// Typealias for UIFont
+public typealias RPFont = UIFont
 #else
-    import AppKit
-    /// Typealias for NSColor
-    public typealias RPColor = NSColor
-    /// Typealias for NSFont
-    public typealias RPFont = NSFont
+import AppKit
+/// Typealias for NSColor
+public typealias RPColor = NSColor
+/// Typealias for NSFont
+public typealias RPFont = NSFont
 
 #endif
 
@@ -92,18 +92,18 @@ open class Theme {
         
         #if os(iOS) || os(tvOS)
         let boldDescriptor = UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family:font.familyName,
-                                                                UIFontDescriptor.AttributeName.face:"Bold"])
+                                                               UIFontDescriptor.AttributeName.face:"Bold"])
         let italicDescriptor = UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family:font.familyName,
                                                                  UIFontDescriptor.AttributeName.face:"Italic"])
         let obliqueDescriptor = UIFontDescriptor(fontAttributes: [UIFontDescriptor.AttributeName.family:font.familyName,
                                                                   UIFontDescriptor.AttributeName.face:"Oblique"])
         #else
         let boldDescriptor = NSFontDescriptor(fontAttributes: [.family:font.familyName!,
-                                                                   .face:"Bold"])
+                                                               .face:"Bold"])
         let italicDescriptor = NSFontDescriptor(fontAttributes: [.family:font.familyName!,
-                                                                     .face:"Italic"])
+                                                                 .face:"Italic"])
         let obliqueDescriptor = NSFontDescriptor(fontAttributes: [.family:font.familyName!,
-                                                                      .face:"Oblique"])
+                                                                  .face:"Oblique"])
         #endif
         
         boldCodeFont = RPFont(descriptor: boldDescriptor, size: font.pointSize)
@@ -122,7 +122,7 @@ open class Theme {
         {
             boldCodeFont = font
         }
-
+        
         if(themeDict != nil)
         {
             themeDict = strippedThemeToTheme(strippedTheme)
@@ -164,8 +164,8 @@ open class Theme {
         let cssRegex = try! NSRegularExpression(pattern: "(?:(\\.[a-zA-Z0-9\\-_]*(?:[, ]\\.[a-zA-Z0-9\\-_]*)*)\\{([^\\}]*?)\\})", options:[.caseInsensitive])
         
         let results = cssRegex.matches(in: themeString,
-                                               options: [.reportCompletion],
-                                               range: NSMakeRange(0, objcString.length))
+                                       options: [.reportCompletion],
+                                       range: NSMakeRange(0, objcString.length))
         
         var resultDict = [String:[String:String]]()
         
@@ -180,7 +180,7 @@ open class Theme {
                     {
                         attributes[cssPropComp[0]] = cssPropComp[1]
                     }
-
+                    
                 }
                 if attributes.count > 0
                 {
@@ -270,12 +270,12 @@ open class Theme {
     {
         switch fontStyle
         {
-            case "bold", "bolder", "600", "700", "800", "900":
-                return boldCodeFont
-            case "italic", "oblique":
-                return italicCodeFont
-            default:
-                return codeFont
+        case "bold", "bolder", "600", "700", "800", "900":
+            return boldCodeFont
+        case "italic", "oblique":
+            return italicCodeFont
+        default:
+            return codeFont
         }
     }
     
@@ -297,9 +297,9 @@ open class Theme {
     
     private func colorWithHexString (_ hex:String) -> RPColor
     {
-
+        
         var cString:String = hex.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-
+        
         if (cString.hasPrefix("#"))
         {
             cString = (cString as NSString).substring(from: 1)
@@ -333,7 +333,7 @@ open class Theme {
         
         if (cString.count == 6 )
         {
-        
+            
             let rString = (cString as NSString).substring(to: 2)
             let gString = ((cString as NSString).substring(from: 2) as NSString).substring(to: 2)
             let bString = ((cString as NSString).substring(from: 4) as NSString).substring(to: 2)
@@ -361,5 +361,5 @@ open class Theme {
         
     }
     
-
+    
 }
