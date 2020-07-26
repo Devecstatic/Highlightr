@@ -25,6 +25,7 @@ let package = Package(
         .target(
             name: "Highlightr",
             dependencies: [],
+            path: "Highlightr",
             resources: [
                 .copy("Assets"),
                 .copy("Highlightr")

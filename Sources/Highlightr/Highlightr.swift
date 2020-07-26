@@ -10,7 +10,7 @@ import Foundation
 import JavaScriptCore
 
 #if os(OSX)
-    import AppKit
+import AppKit
 #endif
 
 /// Utility class for generating a highlighted NSAttributedString from a String.
@@ -27,12 +27,12 @@ open class Highlightr
     
     /// This block will be called every time the theme changes.
     open var themeChanged : ((Theme) -> Void)?
-
+    
     /// Defaults to `false` - when `true`, forces highlighting to finish even if illegal syntax is detected.
     open var ignoreIllegals = false
-
+    
     private let hljs: JSValue
-
+    
     private let bundle : Bundle
     private let htmlStart = "<"
     private let spanStart = "span class=\""
@@ -42,9 +42,9 @@ open class Highlightr
     
     /**
      Default init method.
-
+     
      - parameter highlightPath: The path to `highlight.min.js`. Defaults to `Highlightr.framework/highlight.min.js`
-
+     
      - returns: Highlightr instance.
      */
     public init?(highlightPath: String? = nil)
@@ -52,7 +52,7 @@ open class Highlightr
         let jsContext = JSContext()!
         let window = JSValue(newObjectIn: jsContext)
         jsContext.setObject(window, forKeyedSubscript: "window" as NSString)
-
+        
         let bundle = Bundle(for: Highlightr.self)
         self.bundle = bundle
         guard let hgPath = highlightPath ?? bundle.path(forResource: "highlight.min", ofType: "js") else
@@ -95,7 +95,7 @@ open class Highlightr
         }
         let themeString = try! String.init(contentsOfFile: defTheme)
         theme =  Theme(themeString: themeString)
-
+        
         
         return true
     }
@@ -120,7 +120,7 @@ open class Highlightr
             // language auto detection
             ret = hljs.invokeMethod("highlightAuto", withArguments: [code])
         }
-
+        
         let res = ret.objectForKeyedSubscript("value")
         guard var string = res!.toString() else
         {
@@ -135,9 +135,9 @@ open class Highlightr
         {
             string = "<style>"+theme.lightTheme+"</style><pre><code class=\"hljs\">"+string+"</code></pre>"
             let opt: [NSAttributedString.DocumentReadingOptionKey : Any] = [
-             .documentType: NSAttributedString.DocumentType.html,
-             .characterEncoding: String.Encoding.utf8.rawValue
-             ]
+                .documentType: NSAttributedString.DocumentType.html,
+                .characterEncoding: String.Encoding.utf8.rawValue
+            ]
             
             let data = string.data(using: String.Encoding.utf8)!
             safeMainSync
@@ -244,8 +244,8 @@ open class Highlightr
         }
         
         let results = htmlEscape.matches(in: resultString.string,
-                                               options: [.reportCompletion],
-                                               range: NSMakeRange(0, resultString.length))
+                                         options: [.reportCompletion],
+                                         range: NSMakeRange(0, resultString.length))
         var locOffset = 0
         for result in results
         {
@@ -257,9 +257,9 @@ open class Highlightr
                 locOffset += result.range.length-1;
             }
             
-
+            
         }
-
+        
         return resultString
     }
     
