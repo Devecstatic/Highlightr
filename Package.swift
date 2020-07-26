@@ -26,13 +26,7 @@ let package = Package(
             name: "Highlightr",
             dependencies: [],
             resources: [
-                .copy("Assets"),
-                .copy("Highlightr"),
-                .copy("Highlightr.swift"),
-                .copy("CodeAttributedString.swift"),
-                .copy("HTMLUtils.swift"),
-                .copy("Shims.swift"),
-                .copy("Theme.swift")
+                .copy("include")
             ]),
         .testTarget(
             name: "HighlightrTests",
